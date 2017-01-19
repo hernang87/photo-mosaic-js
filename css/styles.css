@@ -1,0 +1,18 @@
+body {
+    font-family: sans-serif;
+}
+.drop-zone {
+    border: 2px dashed #aaa;
+    
+    color: #aaa;
+    text-align: center;
+    padding: 20vh 0;
+}
+
+.render-area {
+    margin-top: 5vh;
+}
+
+.original-image {
+    width: 40vw;
+}
