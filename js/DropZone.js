@@ -31,8 +31,6 @@ class DropZone {
         if(this.renderOriginalImage) {
             this.renderImage(image);   
         }
-
-        this.createMosaic(image);
     }
 
     renderImage(image) {
@@ -42,16 +40,22 @@ class DropZone {
                 let imgElement = new Image();
                 imgElement.src = e.target.result;
                 imgElement.className = 'original-image';
-                this.renderArea.appendChild(imgElement);         
+                this.renderArea.appendChild(imgElement); 
+                this.createMosaic({image: imgElement, imageData: e.target.result});        
             }
         })(image);
 
-        reader.readAsDataURL(image);        
+        reader.readAsDataURL(image);  
+
+
     }
 
     createMosaic(image) {
-        let mc = new MosaicCreator({ image });
-
+        let mc = new MosaicCreator({
+            maxWidth: 1000,
+            maxHeight: 1000
+        });        
+        mc.getMosaic(image);
     }
 }
 
