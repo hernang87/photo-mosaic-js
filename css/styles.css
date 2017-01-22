@@ -1,6 +1,11 @@
 body {
     font-family: sans-serif;
 }
+
+.header {
+    text-align: center;
+}
+
 .drop-zone {
     border: 2px dashed #aaa;
     
@@ -9,10 +14,27 @@ body {
     padding: 20vh 0;
 }
 
-.render-area {
-    margin-top: 5vh;
+.file-input input {
+    display: none;
 }
 
-.original-image {
-    width: 40vw;
+.underline {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.arrow {
+    text-align: center;
+    font-size: 5vw;
+    display: none;
+}
+
+.visible {
+    display: block;
+}
+
+.result-canvas {
+    display: block;
+    margin: 20px auto 0;
+    max-width: 100%; /* So the whole image is displayed, may cause tiles to look smaller than they are */
 }

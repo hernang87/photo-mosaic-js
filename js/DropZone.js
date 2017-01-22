@@ -1,12 +1,11 @@
 class DropZone {
-    constructor(options) {
+    constructor(options = {}) {
         if(!options.zone) {
             throw new Error('Zone is not defined');
         }
 
-        this.renderArea = options.renderArea || document.body;
-        this.renderOriginalImage = options.renderOriginalImage;
         this.zone = options.zone;
+        this.dropEvent = options.dropEvent || new Event('dropped');
         this.zone.addEventListener('dragover', this.onDragOver.bind(this));
         this.zone.addEventListener('drop', this.onDrop.bind(this));
     }
@@ -28,34 +27,9 @@ class DropZone {
             throw new Error('The file isn\'t an image');
         }
 
-        if(this.renderOriginalImage) {
-            this.renderImage(image);   
-        }
-    }
+        this.dropEvent.image = image;
 
-    renderImage(image) {
-        let reader = new FileReader();
-        reader.onload = (file => {            
-            return e => {                
-                let imgElement = new Image();
-                imgElement.src = e.target.result;
-                imgElement.className = 'original-image';
-                this.renderArea.appendChild(imgElement); 
-                this.createMosaic({image: imgElement, imageData: e.target.result});        
-            }
-        })(image);
-
-        reader.readAsDataURL(image);  
-
-
-    }
-
-    createMosaic(image) {
-        let mc = new MosaicCreator({
-            maxWidth: 1000,
-            maxHeight: 1000
-        });        
-        mc.getMosaic(image);
+        document.dispatchEvent(this.dropEvent);
     }
 }
 
