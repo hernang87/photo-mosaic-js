@@ -76,15 +76,16 @@ class MosaicCreator {
         let totalPixels = 0;
 
         // To start at the beginning
-        let currentPixel = -this.pixelInterval + 1;
+        let currentPixel = -this.pixelInterval * 4 + 1;
 
         // This loop moves by the pixelInterval variable
         // The smaller the pixelInterval is the higher the confidende of the average color is
-        while ((currentPixel += this.pixelInterval * (this.pixelInterval-1)) < data.length) {              
+        while (currentPixel < data.length) {              
               rgb.r += data[currentPixel];
               rgb.g += data[currentPixel + 1];
               rgb.b += data[currentPixel + 2];
               totalPixels++;
+              currentPixel += this.pixelInterval * 4;
           }
           
           // To get the average of the analyzed pixels
